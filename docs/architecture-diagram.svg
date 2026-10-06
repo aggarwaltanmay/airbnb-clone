@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1050" viewBox="0 0 1800 1050" role="img" aria-labelledby="title description">
+  <title id="title">Production-Scale Vacation Rental Marketplace Architecture</title>
+  <desc id="description">A layered architecture showing clients, edge delivery, experience and API layers, domain services, data systems, and the deployment platform.</desc>
+  <defs>
+    <style>
+      .page-title { font: 700 34px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #172b4d; }
+      .page-subtitle { font: 400 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #60708c; }
+      .layer-title { font: 700 22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #172b4d; }
+      .layer-note { font: 400 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #60708c; }
+      .card-title { font: 700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #172b4d; }
+      .card-copy { font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #60708c; }
+      .flow-label { font: 600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #60708c; letter-spacing: .3px; }
+      .caption { font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #2f80ed; }
+      .layer { fill: #ffffff; stroke: #d8e2ef; stroke-width: 2; }
+      .card { fill: #ffffff; stroke: #d8e2ef; stroke-width: 1.5; }
+      .flow { fill: none; stroke: #2f80ed; stroke-width: 3; marker-end: url(#arrow-blue); }
+      .async { fill: none; stroke: #f2994a; stroke-width: 3; stroke-dasharray: 8 7; marker-end: url(#arrow-orange); }
+      .ops { fill: none; stroke: #2a9d8f; stroke-width: 3; stroke-dasharray: 8 7; marker-end: url(#arrow-teal); }
+    </style>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#17325c" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f80ed"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f2994a"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2a9d8f"/>
+    </marker>
+  </defs>
+
+  <rect width="1800" height="1050" fill="#f7f9fc"/>
+
+  <text x="60" y="54" class="page-title">Production-Scale Vacation Rental Marketplace</text>
+  <text x="60" y="82" class="page-subtitle">Global delivery, independent domain scaling, resilient booking, search, media, payments and operations</text>
+  <text x="1740" y="54" text-anchor="end" class="caption">ARCHITECTURE DELIVERABLE</text>
+
+  <!-- Request path -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="120" width="250" height="115" rx="15" fill="#ecf4ff" stroke="#c9ddf7" stroke-width="2"/>
+    <rect x="60" y="120" width="250" height="8" rx="8" fill="#2f80ed"/>
+    <text x="185" y="165" text-anchor="middle" class="card-title">Client Applications</text>
+    <text x="185" y="191" text-anchor="middle" class="card-copy">Web · mobile · partner · admin</text>
+
+    <rect x="365" y="120" width="250" height="115" rx="15" fill="#f0edff" stroke="#d8cffc" stroke-width="2"/>
+    <rect x="365" y="120" width="250" height="8" rx="8" fill="#7756ff"/>
+    <text x="490" y="165" text-anchor="middle" class="card-title">Global Edge</text>
+    <text x="490" y="189" text-anchor="middle" class="card-copy">DNS · WAF · TLS · CDN</text>
+    <text x="490" y="209" text-anchor="middle" class="card-copy">Bot protection · rate limiting</text>
+
+    <rect x="670" y="120" width="280" height="115" rx="15" fill="#eaf7f4" stroke="#c6e8df" stroke-width="2"/>
+    <rect x="670" y="120" width="280" height="8" rx="8" fill="#2a9d8f"/>
+    <text x="810" y="165" text-anchor="middle" class="card-title">Experience Layer</text>
+    <text x="810" y="189" text-anchor="middle" class="card-copy">SSR web app · static assets</text>
+    <text x="810" y="209" text-anchor="middle" class="card-copy">Feature flags · localization</text>
+
+    <rect x="1005" y="120" width="280" height="115" rx="15" fill="#fff2e5" stroke="#f6d4b0" stroke-width="2"/>
+    <rect x="1005" y="120" width="280" height="8" rx="8" fill="#f2994a"/>
+    <text x="1145" y="165" text-anchor="middle" class="card-title">API Gateway / BFF</text>
+    <text x="1145" y="189" text-anchor="middle" class="card-copy">Authentication · request routing</text>
+    <text x="1145" y="209" text-anchor="middle" class="card-copy">Aggregation · validation · limits</text>
+
+    <rect x="1440" y="120" width="300" height="115" rx="15" fill="#fdecee" stroke="#f5c9cd" stroke-width="2"/>
+    <rect x="1440" y="120" width="300" height="8" rx="8" fill="#ef535a"/>
+    <text x="1590" y="165" text-anchor="middle" class="card-title">External Providers</text>
+    <text x="1590" y="189" text-anchor="middle" class="card-copy">Payments · fraud · maps</text>
+    <text x="1590" y="209" text-anchor="middle" class="card-copy">Email · SMS · push</text>
+  </g>
+
+  <path d="M 310 177 H 365" class="flow"/>
+  <path d="M 615 177 H 670" class="flow"/>
+  <path d="M 950 177 H 1005" class="flow"/>
+  <path d="M 1285 177 H 1440" class="async"/>
+  <text x="1362" y="163" text-anchor="middle" class="flow-label">SECURE APIs</text>
+
+  <!-- Domain layer -->
+  <rect x="60" y="300" width="1680" height="300" rx="20" class="layer"/>
+  <text x="90" y="338" class="layer-title">Domain Services</text>
+  <text x="90" y="363" class="layer-note">Stateless services scale independently; booking and payment workflows use idempotency, inventory holds and sagas.</text>
+
+  <path d="M 1145 235 V 278 H 900 V 300" class="flow"/>
+  <text x="1165" y="271" class="flow-label">AUTHENTICATED REQUESTS</text>
+
+  <g>
+    <rect x="90" y="390" width="300" height="78" rx="12" class="card"/>
+    <rect x="90" y="390" width="7" height="78" rx="5" fill="#2f80ed"/>
+    <text x="115" y="420" class="card-title">Identity &amp; Trust</text>
+    <text x="115" y="445" class="card-copy">Accounts, sessions, KYC, permissions</text>
+
+    <rect x="420" y="390" width="300" height="78" rx="12" class="card"/>
+    <rect x="420" y="390" width="7" height="78" rx="5" fill="#2a9d8f"/>
+    <text x="445" y="420" class="card-title">Listings</text>
+    <text x="445" y="445" class="card-copy">Homes, hosts, amenities, policies</text>
+
+    <rect x="750" y="390" width="300" height="78" rx="12" class="card"/>
+    <rect x="750" y="390" width="7" height="78" rx="5" fill="#7756ff"/>
+    <text x="775" y="420" class="card-title">Search &amp; Discovery</text>
+    <text x="775" y="445" class="card-copy">Geo search, filters, ranking</text>
+
+    <rect x="1080" y="390" width="300" height="78" rx="12" class="card"/>
+    <rect x="1080" y="390" width="7" height="78" rx="5" fill="#f2994a"/>
+    <text x="1105" y="420" class="card-title">Pricing &amp; Availability</text>
+    <text x="1105" y="445" class="card-copy">Calendars, rules, taxes, inventory</text>
+
+    <rect x="1410" y="390" width="300" height="78" rx="12" class="card"/>
+    <rect x="1410" y="390" width="7" height="78" rx="5" fill="#ef535a"/>
+    <text x="1435" y="420" class="card-title">Booking Orchestrator</text>
+    <text x="1435" y="445" class="card-copy">Holds, checkout, saga workflow</text>
+
+    <rect x="90" y="492" width="300" height="78" rx="12" class="card"/>
+    <rect x="90" y="492" width="7" height="78" rx="5" fill="#ef535a"/>
+    <text x="115" y="522" class="card-title">Payments</text>
+    <text x="115" y="547" class="card-copy">Authorise, capture, refund, payout</text>
+
+    <rect x="420" y="492" width="300" height="78" rx="12" class="card"/>
+    <rect x="420" y="492" width="7" height="78" rx="5" fill="#2f80ed"/>
+    <text x="445" y="522" class="card-title">Reviews &amp; Reputation</text>
+    <text x="445" y="547" class="card-copy">Ratings, reviews, moderation</text>
+
+    <rect x="750" y="492" width="300" height="78" rx="12" class="card"/>
+    <rect x="750" y="492" width="7" height="78" rx="5" fill="#2a9d8f"/>
+    <text x="775" y="522" class="card-title">Media</text>
+    <text x="775" y="547" class="card-copy">Uploads, resizing, metadata, safety</text>
+
+    <rect x="1080" y="492" width="300" height="78" rx="12" class="card"/>
+    <rect x="1080" y="492" width="7" height="78" rx="5" fill="#7756ff"/>
+    <text x="1105" y="522" class="card-title">Notifications</text>
+    <text x="1105" y="547" class="card-copy">Email, SMS, push, templates</text>
+
+    <rect x="1410" y="492" width="300" height="78" rx="12" class="card"/>
+    <rect x="1410" y="492" width="7" height="78" rx="5" fill="#f2994a"/>
+    <text x="1435" y="522" class="card-title">Admin &amp; Support</text>
+    <text x="1435" y="547" class="card-copy">Disputes, refunds, audit tooling</text>
+  </g>
+
+  <!-- Data layer -->
+  <rect x="60" y="655" width="1680" height="165" rx="20" class="layer"/>
+  <text x="90" y="692" class="layer-title">Data, Search &amp; Eventing</text>
+  <text x="90" y="716" class="layer-note">Transactional writes stay consistent; caches, search indexes and side effects update from committed domain events.</text>
+
+  <path d="M 900 600 V 655" class="flow"/>
+  <text x="920" y="633" class="flow-label">READ · WRITE · PUBLISH EVENTS</text>
+
+  <g>
+    <rect x="90" y="735" width="300" height="62" rx="12" class="card"/>
+    <circle cx="117" cy="766" r="9" fill="#2f80ed"/>
+    <text x="140" y="759" class="card-title">PostgreSQL Cluster</text>
+    <text x="140" y="781" class="card-copy">Shards · replicas · PITR backups</text>
+
+    <rect x="420" y="735" width="300" height="62" rx="12" class="card"/>
+    <circle cx="447" cy="766" r="9" fill="#ef535a"/>
+    <text x="470" y="759" class="card-title">Redis Cluster</text>
+    <text x="470" y="781" class="card-copy">Cache · sessions · locks · limits</text>
+
+    <rect x="750" y="735" width="300" height="62" rx="12" class="card"/>
+    <circle cx="777" cy="766" r="9" fill="#7756ff"/>
+    <text x="800" y="759" class="card-title">OpenSearch</text>
+    <text x="800" y="781" class="card-copy">Geo index · filters · ranking</text>
+
+    <rect x="1080" y="735" width="300" height="62" rx="12" class="card"/>
+    <circle cx="1107" cy="766" r="9" fill="#2a9d8f"/>
+    <text x="1130" y="759" class="card-title">Object Storage + CDN</text>
+    <text x="1130" y="781" class="card-copy">Originals · renditions · uploads</text>
+
+    <rect x="1410" y="735" width="300" height="62" rx="12" class="card"/>
+    <circle cx="1437" cy="766" r="9" fill="#f2994a"/>
+    <text x="1460" y="759" class="card-title">Event Bus + Streams</text>
+    <text x="1460" y="781" class="card-copy">Outbox · indexing · analytics</text>
+  </g>
+
+  <!-- Platform layer -->
+  <rect x="60" y="875" width="1680" height="135" rx="20" class="layer"/>
+  <text x="90" y="912" class="layer-title">Platform, Deployment &amp; Operations</text>
+  <text x="90" y="936" class="layer-note">Multi-zone containers, autoscaling, progressive delivery, encryption, tested recovery and measurable service objectives.</text>
+
+  <path d="M 900 875 V 820" class="ops"/>
+  <text x="920" y="854" class="flow-label">DEPLOY · SECURE · OBSERVE</text>
+
+  <g>
+    <rect x="90" y="955" width="300" height="38" rx="10" fill="#ecf4ff" stroke="#c9ddf7"/>
+    <text x="240" y="980" text-anchor="middle" class="card-title">Container Platform + Autoscaling</text>
+
+    <rect x="420" y="955" width="300" height="38" rx="10" fill="#eaf7f4" stroke="#c6e8df"/>
+    <text x="570" y="980" text-anchor="middle" class="card-title">CI/CD + Infrastructure as Code</text>
+
+    <rect x="750" y="955" width="300" height="38" rx="10" fill="#fff2e5" stroke="#f6d4b0"/>
+    <text x="900" y="980" text-anchor="middle" class="card-title">Logs · Metrics · Traces · Alerts</text>
+
+    <rect x="1080" y="955" width="300" height="38" rx="10" fill="#fdecee" stroke="#f5c9cd"/>
+    <text x="1230" y="980" text-anchor="middle" class="card-title">IAM · Secrets · Encryption · Audit</text>
+
+    <rect x="1410" y="955" width="300" height="38" rx="10" fill="#f0edff" stroke="#d8cffc"/>
+    <text x="1560" y="980" text-anchor="middle" class="card-title">Health Checks · Circuit Breakers</text>
+  </g>
+
+  <text x="60" y="1035" class="flow-label">SOLID BLUE = SYNCHRONOUS FLOW</text>
+  <text x="330" y="1035" class="flow-label" fill="#f2994a">DASHED ORANGE = EXTERNAL PROVIDER FLOW</text>
+  <text x="1740" y="1035" text-anchor="end" class="flow-label">SCALE: STATELESS COMPUTE + PARTITIONED DATA + CACHES + EVENT-DRIVEN SIDE EFFECTS</text>
+</svg>

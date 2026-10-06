@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reference Fidelity"
+  short_description: "Audit and refine a UI against a supplied reference."
+  default_prompt: "Compare the local Airbnb clone with the supplied reference and fix visual or interaction differences."
